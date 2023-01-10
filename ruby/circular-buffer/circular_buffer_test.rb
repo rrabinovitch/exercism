@@ -1,5 +1,6 @@
 require 'minitest/autorun'
 require_relative 'circular_buffer'
+require 'pry'
 
 class CircularBufferTest < Minitest::Test
   def test_read_empty_buffer_throws_buffer_empty_exception
@@ -8,7 +9,7 @@ class CircularBufferTest < Minitest::Test
   end
 
   def test_write_and_read_back_one_item
-    skip
+    # skip
     buffer = CircularBuffer.new(1)
     buffer.write '1'
     assert_equal '1', buffer.read

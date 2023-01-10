@@ -8,14 +8,32 @@ To get started with TDD, see the `README.md` file in your
 
 class CircularBuffer
   def initialize(size)
-    # @size = size
+    @max_size = size
+    @current_size = 0
+    @newest = -1
+    @oldest = -1
+    @current_state = current_state
+  end
+
+  def current_state
+    buffer = Array.new
+    buffer[@max_size - 1] = nil
+    buffer
   end
 
   def read
-    raise BufferEmptyException 
+    raise BufferEmptyException unless @current_size > 0
+    value = @current_state[@newest]
+    @current_state[@newest] = nil
+    @newest -= 1
+    @current_size -= 1
+    value
   end
 
   def write(element)
+    @current_size += 1
+    @current_state[@newest] = element
+    @newest += 1
   end
 
   class BufferEmptyException < StandardError; end
