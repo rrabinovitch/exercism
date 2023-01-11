@@ -11,6 +11,10 @@ class Series
     end
 
     def slices(slice_length)
-        [@digits_string]
+        array = []
+        @digits_string.chars.each_cons(slice_length) do |a|
+            array << a.join
+        end
+        array
     end
 end
