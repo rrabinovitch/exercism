@@ -11,6 +11,7 @@ class Series
     end
 
     def slices(slice_length)
+        raise ArgumentError.new if slice_length > @digits_string.length
         array = []
         @digits_string.chars.each_cons(slice_length) do |a|
             array << a.join
