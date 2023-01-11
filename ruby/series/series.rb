@@ -9,4 +9,8 @@ class Series
     def initialize(digits_string)
         @digits_string = digits_string
     end
+
+    def slices(slice_length)
+        [@digits_string]
+    end
 end
