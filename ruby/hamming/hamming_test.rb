@@ -19,38 +19,38 @@ class HammingTest < Minitest::Test
   end
 
   def test_long_identical_strands
-    skip
+    # skip
     assert_equal 0, Hamming.compute("GGACTGAAATCTG", "GGACTGAAATCTG")
   end
 
   def test_long_different_strands
-    skip
+    # skip
     assert_equal 9, Hamming.compute("GGACGGATTCTG", "AGGACGGATTCT")
   end
 
   def test_disallow_first_strand_longer
-    skip
+    # skip
     assert_raises(ArgumentError) do
       Hamming.compute("AATG", "AAA")
     end
   end
 
   def test_disallow_second_strand_longer
-    skip
+    # skip
     assert_raises(ArgumentError) do
       Hamming.compute("ATA", "AGTG")
     end
   end
 
   def test_disallow_empty_first_strand
-    skip
+    # skip
     assert_raises(ArgumentError) do
       Hamming.compute("", "G")
     end
   end
 
   def test_disallow_empty_second_strand
-    skip
+    # skip
     assert_raises(ArgumentError) do
       Hamming.compute("G", "")
     end
