@@ -7,7 +7,7 @@ To get started with TDD, see the `README.md` file in your
 =end
 class Hamming
     def self.compute(strand_1, strand_2)
-        0
+        0 if strand_1 == strand_2
     end
 end
 
