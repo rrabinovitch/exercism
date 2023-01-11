@@ -12,10 +12,10 @@ class CircularBuffer
     @current_size = 0
     @newest = -1
     @oldest = -1
-    @current_state = current_state
+    @current_state = buffer_setup
   end
 
-  def current_state
+  def buffer_setup
     buffer = Array.new
     buffer[@max_size - 1] = nil
     buffer
@@ -23,6 +23,7 @@ class CircularBuffer
 
   def read
     raise BufferEmptyException unless @current_size > 0
+    # ^^ need to call ::new on exception probably
     value = @current_state[@newest]
     @current_state[@newest] = nil
     @newest -= 1
@@ -34,6 +35,13 @@ class CircularBuffer
     @current_size += 1
     @current_state[@newest] = element
     @newest += 1
+  end
+
+  def clear
+    @newest = -1
+    @oldest = -1
+    @current_size = 0
+    buffer_setup
   end
 
   class BufferEmptyException < StandardError; end

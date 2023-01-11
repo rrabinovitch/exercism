@@ -17,7 +17,7 @@ class CircularBufferTest < Minitest::Test
   end
 
   def test_write_and_read_back_multiple_items
-    skip
+    # skip
     buffer = CircularBuffer.new(2)
     buffer.write '1'
     buffer.write '2'
@@ -27,7 +27,7 @@ class CircularBufferTest < Minitest::Test
   end
 
   def test_clearing_buffer
-    skip
+    # skip
     buffer = CircularBuffer.new(3)
     ('1'..'3').each { |i| buffer.write i }
     buffer.clear
