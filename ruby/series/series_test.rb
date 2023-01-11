@@ -67,7 +67,7 @@ class SeriesTest < Minitest::Test
   end
 
   def test_empty_series_is_invalid
-    skip
+    # skip
     slice_string = ""
     series = Series.new(slice_string)
     assert_raises ArgumentError do
