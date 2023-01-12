@@ -18,7 +18,8 @@ class Moviegoer
 
   # Popcorn is 🍿
   def claim_free_popcorn!
-    raise NotMovieClubMemberError.new unless @member
-    "🍿"
+    @member ? "🍿" : (raise NotMovieClubMemberError)
+    # raise NotMovieClubMemberError.new unless @member
+    # "🍿"
   end
 end
