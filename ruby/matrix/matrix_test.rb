@@ -1,5 +1,6 @@
 require 'minitest/autorun'
 require_relative 'matrix'
+require 'pry'
 
 class MatrixTest < Minitest::Test
   def test_extract_a_row
@@ -8,7 +9,7 @@ class MatrixTest < Minitest::Test
   end
 
   def test_extract_same_row_again
-    skip
+    # skip
     matrix = Matrix.new("9 7\n8 6")
     assert_equal [9, 7], matrix.rows[0]
   end
