@@ -60,6 +60,5 @@ class MatrixTest < Minitest::Test
   end
 end
 
-# test: columns method with a different number of columns (2 or 4)
 # test: raise exception when rows have differing numbers of elements
 # test: raise exception when columns have differing numbers of elements

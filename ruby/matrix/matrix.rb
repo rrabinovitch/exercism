@@ -11,11 +11,9 @@ class Matrix
     end
 
     def rows
-        rows = []
-        @string.split("\n").each do |row|
-            rows << row.split.map {|n| n.to_i }
+        @string.split("\n").map do |row|
+            row.split.map {|n| n.to_i }
         end
-        rows
     end
 
     def columns
