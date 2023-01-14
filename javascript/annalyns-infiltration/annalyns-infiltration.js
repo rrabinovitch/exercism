@@ -40,7 +40,7 @@ export function canExecuteFastAttack(knightIsAwake) {
  * @returns {boolean} Whether or not you can spy on someone.
  */
 export function canSpy(knightIsAwake, archerIsAwake, prisonerIsAwake) {
-  throw new Error('Remove this line and implement the function');
+  return ((knightIsAwake || archerIsAwake || prisonerIsAwake) ? true : false)
 }
 
 /**
@@ -52,7 +52,7 @@ export function canSpy(knightIsAwake, archerIsAwake, prisonerIsAwake) {
  * @returns {boolean} Whether or not you can send a signal to the prisoner.
  */
 export function canSignalPrisoner(archerIsAwake, prisonerIsAwake) {
-  throw new Error('Remove this line and implement the function');
+  return ((!archerIsAwake && prisonerIsAwake) ? true : false)
 }
 
 /**
