@@ -11,12 +11,11 @@ class Phrase
     end
 
     def word_count
-        # binding.pry
-        @phrase.scan(/[\w']+/).inject(Hash.new(0)) do |word_counter, word|
-            # binding.pry
+        @phrase.delete_prefix("'").delete_suffix("'").scan(/[\w|\']+/).inject(Hash.new(0)) do |word_counter, word|
+            word.slice!(0) if word.start_with?("'")
+            word.slice!(-1) if word.end_with?("'")
             word_counter[word.downcase] += 1
             word_counter
         end
-        # binding.pry
     end
 end

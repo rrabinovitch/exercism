@@ -60,14 +60,14 @@ class WordCountTest < Minitest::Test
   end
 
   def test_with_apostrophes
-    skip
+    # skip
     phrase = Phrase.new("'First: don't laugh. Then: don't cry. You're getting it.'")
     counts = { "first" => 1, "don't" => 2, "laugh" => 1, "then" => 1, "cry" => 1, "you're" => 1, "getting" => 1, "it" => 1 }
     assert_equal counts, phrase.word_count
   end
 
   def test_with_quotations
-    skip
+    # skip
     phrase = Phrase.new("Joe can't tell between 'large' and large.")
     counts = { "joe" => 1, "can't" => 1, "tell" => 1, "between" => 1, "large" => 2, "and" => 1 }
     assert_equal counts, phrase.word_count
@@ -88,14 +88,14 @@ class WordCountTest < Minitest::Test
   end
 
   def test_alternating_word_separators_not_detected_as_a_word
-    skip
+    # skip
     phrase = Phrase.new(",\n,one,\n ,two \n 'three'")
     counts = { "one" => 1, "two" => 1, "three" => 1 }
     assert_equal counts, phrase.word_count
   end
 
   def test_quotation_for_word_with_apostrophe
-    skip
+    # skip
     phrase = Phrase.new("can, can't, 'can't'")
     counts = { "can" => 1, "can't" => 2 }
     assert_equal counts, phrase.word_count
