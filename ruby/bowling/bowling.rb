@@ -9,6 +9,7 @@ class Game
     # attr_reader :score
     def initialize
         @frames = Hash.new { |hash, key| hash[key] = {rolls: [], frame_type: nil} } # regular hash initialization with default values was not actually storing values set in #roll method
+        # https://medium.com/klaxit-techblog/a-headache-in-ruby-hash-default-values-bf2706660392
         @current_frame = 1
     end
 
@@ -43,7 +44,9 @@ class Game
                 score = score + frame_data[:rolls].sum + @frames[frame + 1][:rolls].first
         # strike ==> if rolls.count == 1 && rolls.sum == 10 (OR JUST if rolls.first == 10): score = score + 10 + @frames[frame + 1].sum
             elsif frame_data[:frame_type] == :strike
-                score = score + 10 + @frames[frame + 1].sum
+                # binding.pry
+                score = score + 10 + @frames[frame + 1][:rolls].sum if @frames[frame + 1][:frame_type] != :strike
+                score = score + 20 + @frames[frame + 2][:rolls].first if @frames[frame + 1][:frame_type] == :strike
             end
         end
         score
