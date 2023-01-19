@@ -1,9 +1,10 @@
 require 'minitest/autorun'
 require_relative 'bowling'
+require 'pry'
 
 class BowlingTest < Minitest::Test
   def test_should_be_able_to_score_a_game_with_all_zeros
-    # skip
+    skip
     game = Game.new
     rolls = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     rolls.each { |pins| game.roll(pins) }
@@ -11,7 +12,7 @@ class BowlingTest < Minitest::Test
   end
 
   def test_should_be_able_to_score_a_game_with_no_strikes_or_spares
-    # skip
+    skip
     game = Game.new
     rolls = [3, 6, 3, 6, 3, 6, 3, 6, 3, 6, 3, 6, 3, 6, 3, 6, 3, 6, 3, 6]
     rolls.each { |pins| game.roll(pins) }
@@ -19,7 +20,7 @@ class BowlingTest < Minitest::Test
   end
 
   def test_a_spare_followed_by_zeros_is_worth_ten_points
-    # skip
+    skip
     game = Game.new
     rolls = [6, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     rolls.each { |pins| game.roll(pins) }
