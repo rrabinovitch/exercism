@@ -6,10 +6,10 @@ To get started with TDD, see the `README.md` file in your
 `ruby/bowling` directory.
 =end
 class Game
-    attr_reader :score
+    # attr_reader :score
     
     def initialize
-        @score = 0
+        # @score = 0
         @frames = Hash.new()
         @current_frame = 1
     end
@@ -31,6 +31,19 @@ class Game
     end
 
     def score
-        binding.pry
+        score = 0
+        @frames.each do |frame, rolls|
+            # open frame ==> if rolls.sum < 10: score += rolls.sum
+            if rolls.sum < 10
+                score += rolls.sum
+            # spare ==> if rolls.count == 2 && rolls.sum == 10: score = score + rolls.sum + @frames[frame + 1].first
+            elsif rolls.count == 2 && rolls.sum == 10
+                score = score + rolls.sum + @frames[frame + 1].first
+            # strike ==> if rolls.count == 1 && rolls.sum == 10 (OR JUST if rolls.first == 10): score = score + 10 + @frames[frame + 1].sum
+            elsif rolls.first == 10
+                score = score + 10 + @frames[frame + 1].sum
+            end
+        end
+        score
     end
 end
