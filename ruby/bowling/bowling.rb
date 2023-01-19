@@ -14,8 +14,12 @@ class Game
     def roll(pins_hit)
         raise BowlingError if pins_hit < 0 || pins_hit > 10
 
+        # method does not work if a non-bonus frame amounts to more than 10 pins across both rolls
+        # but DOES work if it's a bonus frame after bonus strike roll
         if !@frames[@current_frame][:rolls].empty?
-            raise BowlingError if @frames[@current_frame][:rolls].first + pins_hit > 10
+            unless @frames[@current_frame][:frame_type] == :bonus && @frames[@current_frame][:rolls].first == 10
+                raise BowlingError if @frames[@current_frame][:rolls].first + pins_hit > 10
+            end
         end
 
         @frames[@current_frame][:rolls] << pins_hit
