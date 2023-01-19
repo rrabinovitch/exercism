@@ -67,85 +67,85 @@ class BowlingTest < Minitest::Test
   #   assert_equal 26, game.score
   # end
 
-  def test_consecutive_strikes_each_get_the_two_roll_bonus
-    # skip
-    game = Game.new
-    rolls = [10, 10, 10, 5, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-    # frame 1: 30 (10 + 10 + 10), frame 2: 25 (10 + 10 + 5), frame 3: 18 (10 + 5 + 4), frame 4: 8 (5 + 3)
-    rolls.each { |pins| game.roll(pins) }
-    assert_equal 81, game.score
-  end
+  # def test_consecutive_strikes_each_get_the_two_roll_bonus
+  #   # skip
+  #   game = Game.new
+  #   rolls = [10, 10, 10, 5, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+  #   # frame 1: 30 (10 + 10 + 10), frame 2: 25 (10 + 10 + 5), frame 3: 18 (10 + 5 + 4), frame 4: 8 (5 + 3)
+  #   rolls.each { |pins| game.roll(pins) }
+  #   assert_equal 81, game.score
+  # end
 
-  def test_a_strike_in_the_last_frame_gets_a_two_roll_bonus_that_is_counted_once
-    skip
-    game = Game.new
-    rolls = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 7, 1]
-    rolls.each { |pins| game.roll(pins) }
-    assert_equal 18, game.score
-  end
+  # def test_a_strike_in_the_last_frame_gets_a_two_roll_bonus_that_is_counted_once
+  #   # skip
+  #   game = Game.new
+  #   rolls = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 7, 1]
+  #   rolls.each { |pins| game.roll(pins) }
+  #   assert_equal 18, game.score
+  # end
 
-  def test_rolling_a_spare_with_the_two_roll_bonus_does_not_get_a_bonus_roll
-    skip
-    game = Game.new
-    rolls = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 7, 3]
-    rolls.each { |pins| game.roll(pins) }
-    assert_equal 20, game.score
-  end
+  # def test_rolling_a_spare_with_the_two_roll_bonus_does_not_get_a_bonus_roll
+  #   # skip
+  #   game = Game.new
+  #   rolls = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 7, 3]
+  #   rolls.each { |pins| game.roll(pins) }
+  #   assert_equal 20, game.score
+  # end
 
-  def test_strikes_with_the_two_roll_bonus_do_not_get_bonus_rolls
-    skip
-    game = Game.new
-    rolls = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 10, 10]
-    rolls.each { |pins| game.roll(pins) }
-    assert_equal 30, game.score
-  end
+  # def test_strikes_with_the_two_roll_bonus_do_not_get_bonus_rolls
+  #   # skip
+  #   game = Game.new
+  #   rolls = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 10, 10]
+  #   rolls.each { |pins| game.roll(pins) }
+  #   assert_equal 30, game.score
+  # end
 
-  def test_last_two_strikes_followed_by_only_last_bonus_with_non_strike_points
-    skip
-    game = Game.new
-    rolls = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 10, 0, 1]
-    rolls.each { |pins| game.roll(pins) }
-    assert_equal 31, game.score
-  end
+  # def test_last_two_strikes_followed_by_only_last_bonus_with_non_strike_points
+  #   # skip
+  #   game = Game.new
+  #   rolls = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 10, 0, 1]
+  #   rolls.each { |pins| game.roll(pins) }
+  #   assert_equal 31, game.score
+  # end
 
-  def test_a_strike_with_the_one_roll_bonus_after_a_spare_in_the_last_frame_does_not_get_a_bonus
-    skip
-    game = Game.new
-    rolls = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 3, 10]
-    rolls.each { |pins| game.roll(pins) }
-    assert_equal 20, game.score
-  end
+  # def test_a_strike_with_the_one_roll_bonus_after_a_spare_in_the_last_frame_does_not_get_a_bonus
+  #   # skip
+  #   game = Game.new
+  #   rolls = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 3, 10]
+  #   rolls.each { |pins| game.roll(pins) }
+  #   assert_equal 20, game.score
+  # end
 
-  def test_all_strikes_is_a_perfect_game
-    skip
-    game = Game.new
-    rolls = [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10]
-    rolls.each { |pins| game.roll(pins) }
-    assert_equal 300, game.score
-  end
+  # def test_all_strikes_is_a_perfect_game
+  #   # skip
+  #   game = Game.new
+  #   rolls = [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10]
+  #   rolls.each { |pins| game.roll(pins) }
+  #   assert_equal 300, game.score
+  # end
 
-  def test_rolls_cannot_score_negative_points
-    skip
-    game = Game.new
-    rolls = []
-    rolls.each { |pins| game.roll(pins) }
-    assert_raises Game::BowlingError do
-      game.roll(-1)
-    end
-  end
+  # def test_rolls_cannot_score_negative_points
+  #   # skip
+  #   game = Game.new
+  #   rolls = []
+  #   rolls.each { |pins| game.roll(pins) }
+  #   assert_raises Game::BowlingError do
+  #     game.roll(-1)
+  #   end
+  # end
 
-  def test_a_roll_cannot_score_more_than_10_points
-    skip
-    game = Game.new
-    rolls = []
-    rolls.each { |pins| game.roll(pins) }
-    assert_raises Game::BowlingError do
-      game.roll(11)
-    end
-  end
+  # def test_a_roll_cannot_score_more_than_10_points
+  #   # skip
+  #   game = Game.new
+  #   rolls = []
+  #   rolls.each { |pins| game.roll(pins) }
+  #   assert_raises Game::BowlingError do
+  #     game.roll(11)
+  #   end
+  # end
 
   def test_two_rolls_in_a_frame_cannot_score_more_than_10_points
-    skip
+    # skip
     game = Game.new
     rolls = [5]
     rolls.each { |pins| game.roll(pins) }
@@ -155,7 +155,7 @@ class BowlingTest < Minitest::Test
   end
 
   def test_bonus_roll_after_a_strike_in_the_last_frame_cannot_score_more_than_10_points
-    skip
+    # skip
     game = Game.new
     rolls = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10]
     rolls.each { |pins| game.roll(pins) }
@@ -165,7 +165,7 @@ class BowlingTest < Minitest::Test
   end
 
   def test_two_bonus_rolls_after_a_strike_in_the_last_frame_cannot_score_more_than_10_points
-    skip
+    # skip
     game = Game.new
     rolls = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 5]
     rolls.each { |pins| game.roll(pins) }
@@ -175,7 +175,7 @@ class BowlingTest < Minitest::Test
   end
 
   def test_two_bonus_rolls_after_a_strike_in_the_last_frame_can_score_more_than_10_points_if_one_is_a_strike
-    skip
+    # skip
     game = Game.new
     rolls = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 10, 6]
     rolls.each { |pins| game.roll(pins) }
