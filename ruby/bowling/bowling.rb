@@ -33,17 +33,16 @@ class Game
     end
 
     def score
-        binding.pry
         score = 0
-        @frames.each do |frame, rolls|
-            # open ==> if rolls.sum < 10: score += rolls.sum
-            if rolls.sum < 10
-                score += rolls.sum
-            # spare ==> if rolls.count == 2 && rolls.sum == 10: score = score + rolls.sum + @frames[frame + 1].first
-            elsif rolls.count == 2 && rolls.sum == 10
-                score = score + rolls.sum + @frames[frame + 1].first
-            # strike ==> if rolls.count == 1 && rolls.sum == 10 (OR JUST if rolls.first == 10): score = score + 10 + @frames[frame + 1].sum
-            elsif rolls.first == 10
+        @frames.each do |frame, frame_data|
+        # open ==> if rolls.sum < 10: score += rolls.sum
+            if frame_data[:frame_type] == :open
+                score += frame_data[:rolls].sum
+        # spare ==> if rolls.count == 2 && rolls.sum == 10: score = score + rolls.sum + @frames[frame + 1].first
+            elsif frame_data[:frame_type] == :spare
+                score = score + frame_data[:rolls].sum + @frames[frame + 1][:rolls].first
+        # strike ==> if rolls.count == 1 && rolls.sum == 10 (OR JUST if rolls.first == 10): score = score + 10 + @frames[frame + 1].sum
+            elsif frame_data[:frame_type] == :strike
                 score = score + 10 + @frames[frame + 1].sum
             end
         end
@@ -73,6 +72,24 @@ end
     #         @current_frame += 1
     #     end
     #     pins_hit # overriding implicit return of above conditional so that relevant info is returned instead of current frame number
+    # end
+
+
+
+    # def score
+    #     # @frames.each do |frame, rolls|
+    #     #     # open ==> if rolls.sum < 10: score += rolls.sum
+    #     #     if rolls.sum < 10
+    #     #         score += rolls.sum
+    #     #     # spare ==> if rolls.count == 2 && rolls.sum == 10: score = score + rolls.sum + @frames[frame + 1].first
+    #     #     elsif rolls.count == 2 && rolls.sum == 10
+    #     #         score = score + rolls.sum + @frames[frame + 1].first
+    #     #     # strike ==> if rolls.count == 1 && rolls.sum == 10 (OR JUST if rolls.first == 10): score = score + 10 + @frames[frame + 1].sum
+    #     #     elsif rolls.first == 10
+    #     #         score = score + 10 + @frames[frame + 1].sum
+    #     #     end
+    #     # end
+    #     # score
     # end
 
 
