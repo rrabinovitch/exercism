@@ -12,6 +12,8 @@ class Game
     end
 
     def roll(pins_hit)
+        raise BowlingError if pins_hit < 0 || pins_hit > 10
+
         @frames[@current_frame][:rolls] << pins_hit
         # bonus => (score is only counted as addition to previous frame)
         if @current_frame > 10
@@ -54,4 +56,6 @@ class Game
         end
         score
     end
+
+    class BowlingError < StandardError; end
 end
