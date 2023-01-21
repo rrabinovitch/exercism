@@ -9,16 +9,19 @@ class Game
     def initialize
         @frames = Hash.new { |hash, key| hash[key] = {rolls: [], frame_type: nil} }
         @current_frame = 1
+        @game_complete = false
     end
 
     def roll(pins_hit)
-        raise BowlingError if pins_hit < 0 || pins_hit > 10
+        raise BowlingError.new("Cannot roll a negative number of pins") if pins_hit < 0
+        raise BowlingError.new("Cannot roll more than 10 pins") if pins_hit > 10
+        raise BowlingError.new("Cannot roll after 10th frame complete") if @game_complete
 
-        # method does not work if a non-bonus frame amounts to more than 10 pins across both rolls
-        # but DOES work if it's a bonus frame after bonus strike roll
+        # raise exception if a non-bonus frame amounts to more than 10 pins across both rolls
+        # DOESNT raise exception if it's a bonus frame after bonus strike roll
         if !@frames[@current_frame][:rolls].empty?
             unless @frames[@current_frame][:frame_type] == :bonus && @frames[@current_frame][:rolls].first == 10
-                raise BowlingError if @frames[@current_frame][:rolls].first + pins_hit > 10
+                raise BowlingError.new("A frame's rolls cannot amount to more than 10 pins total") if @frames[@current_frame][:rolls].first + pins_hit > 10
             end
         end
 
@@ -42,9 +45,45 @@ class Game
             @frames[@current_frame][:frame_type] = :strike
             @current_frame += 1
         end
+
+        game_complete?
+    end
+
+    def game_complete?
+        # game is complete when the second roll of the 10th frame is done and it was an open frame
+        @game_complete = true if !@frames[10][:rolls].nil? && @frames[10][:rolls].count == 2
+        # OR when a 10th-frame-spare has been rolled and then one more bonus frame roll is complete
+        if @frames[10][:frame_type] == :spare
+            binding.pry
+        end
+        @game_complete = true if @frames[10][:frame_type] == :spare && @frames[11][:rolls].count == 1
+        # OR when a 10th-frame-strike has been rolled and then two more bonus frame rolls are complete
+        @game_complete = true if @frames[10][:frame_type] == :strike && @frames[11][:rolls].count == 2
+
+        # if @game_complete
+        #     puts "game is complete"
+        #     puts @frames
+        # end
+
+
+
+        # {1=>{:rolls=>[0, 0], :frame_type=>:open},
+        # 10=>{:rolls=>[7, 3], :frame_type=>:spare},
+        # 2=>{:rolls=>[0, 0], :frame_type=>:open},
+        # 3=>{:rolls=>[0, 0], :frame_type=>:open},
+        # 4=>{:rolls=>[0, 0], :frame_type=>:open},
+        # 5=>{:rolls=>[0, 0], :frame_type=>:open},
+        # 6=>{:rolls=>[0, 0], :frame_type=>:open},
+        # 7=>{:rolls=>[0, 0], :frame_type=>:open},
+        # 8=>{:rolls=>[0, 0], :frame_type=>:open},
+        # 9=>{:rolls=>[0, 0], :frame_type=>:open},
+        # 11=>{:rolls=>[], :frame_type=>nil}}
     end
 
     def score
+        # raise BowlingError.new("Game cannot be scored unless it's complete") unless @frames.keys.include?(10) # consider better way to assess this logic bc this would still allow for scoring after the first roll of 10th frame, or before bonus rolls are complete
+        raise BowlingError.new("Game cannot be scored unless it's complete") unless @game_complete
+
         score = 0
         @frames.each do |frame, frame_data|
         # open ==> if rolls.sum < 10: score += rolls.sum
